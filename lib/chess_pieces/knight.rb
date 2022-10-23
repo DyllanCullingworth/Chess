@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-class Pawn < ChessPiece 
+class Knight < ChessPiece 
   
   def unicode_value
-    color == :white ? '9' : 'F'
+    color == :white ? '8' : 'E'
   end
-  
+
 end

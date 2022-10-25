@@ -29,10 +29,10 @@ class Player
     grid[2][main_index] = Bishop.new(color)
     grid[5][main_index] = Bishop.new(color)
 
-    # queen []
+    # queen [3]
     grid[3][main_index] = Queen.new(color)
     
-    # king []
+    # king [4]
     grid[4][main_index] = King.new(color)
   end
   

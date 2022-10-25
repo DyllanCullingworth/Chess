@@ -8,8 +8,16 @@ class ChessPiece
     @color  = color
   end
 
-   def symbol
-     @_symbol ||= ('\u265' + "#{unicode_value}").gsub(/\\u[\da-f]{4}/i) { |m| [m[-4..-1].to_i(16)].pack('U') }.colorize(color)
+  def symbol
+     @_symbol ||= "265#{unicode_value}".to_i(16).chr('UTF-8').colorize(color)
+  end
+
+  def white?
+    color == :white
+  end
+
+  def direction
+    white? ? 1 : -1
   end
 
   class << self

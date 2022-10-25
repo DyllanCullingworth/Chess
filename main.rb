@@ -1,4 +1,4 @@
-require './lib/board'
+require './lib/chess'
 require './lib/chess_piece'
 require './lib/chess_pieces/bishop'
 require './lib/chess_pieces/king'
@@ -10,4 +10,7 @@ require './lib/player'
 require './lib/misc'
 require 'colorize'
 
-Board.new.display_board
+
+p1 = Player.new(:white)
+p2 = Player.new(:black)
+Chess.new(p1, p2).play

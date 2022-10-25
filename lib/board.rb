@@ -1,21 +1,9 @@
 # frozen_string_literal: true
 
-class Board
-
-  attr_accessor :grid
-  
-  def initialize
-    @pieces      = nil
-    @player_turn = nil
-    @grid        = 8.times.map { Array.new(8) { 0 } }
-
-    p1 = Player.new(:white)
-    p2 = Player.new(:black)
-    p1.initialize_pieces(grid)
-    p2.initialize_pieces(grid)
-  end
+module Board
 
   def display_board
+    clear
     puts <<~HEREDOC
            a      b      c      d      e      f      g      h  
         #{row_spacing(7)}
@@ -43,6 +31,8 @@ class Board
       1 #{display_row(0)}
         #{row_spacing(0)}
            a      b      c      d      e      f      g      h  
+
+
     HEREDOC
   end
 

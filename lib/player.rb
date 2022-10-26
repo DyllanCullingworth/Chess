@@ -2,10 +2,13 @@
 
 class Player
   
-  attr_reader :color
+  attr_reader \
+    :color,
+    :pieces
 
   def initialize(color)
-    @color = color
+    @color  = color
+    @pieces = []
   end
 
   def initialize_pieces(grid)
@@ -14,26 +17,34 @@ class Player
 
     # pawns
     0.upto(7) do |i|
-      grid[i][pawn_index] = Pawn.new(color)
+      pieces << Pawn.new(color, grid, [i, pawn_index])
     end
 
     # rooks [0, 7]
-    grid[0][main_index] = Rook.new(color)
-    grid[7][main_index] = Rook.new(color)
+    pieces << Rook.new(color, grid, [0, main_index])
+    pieces << Rook.new(color, grid, [7, main_index])
 
     # knights [1, 6]
-    grid[1][main_index] = Knight.new(color)
-    grid[6][main_index] = Knight.new(color)
+    pieces << Knight.new(color, grid, [1, main_index])
+    pieces << Knight.new(color, grid, [6, main_index])
     
     # bishops [2, 5]
-    grid[2][main_index] = Bishop.new(color)
-    grid[5][main_index] = Bishop.new(color)
+    pieces << Bishop.new(color, grid, [2, main_index])
+    pieces << Bishop.new(color, grid, [5, main_index])
 
     # queen [3]
-    grid[3][main_index] = Queen.new(color)
+    pieces << Queen.new(color, grid, [3, main_index])
     
     # king [4]
-    grid[4][main_index] = King.new(color)
+    pieces << King.new(color, grid, [4, main_index])
+
+    update_grid(grid)
+  end
+
+  def update_grid(grid)
+    pieces.each do |piece|
+      grid[piece.current_position[0]][piece.current_position[1]] = piece
+    end
   end
   
 end

@@ -3,14 +3,22 @@
 class ChessPiece 
 
   attr_reader :color
+
+  attr_accessor \
+    :grid,
+    :current_position
   
-  def initialize(color)
-    @color  = color
+  def initialize(color, grid, position)
+    @color            = color
+    @grid             = grid
+    @current_position = position
   end
 
-  def valid_move?(current_position, desired_position, grid)
+  def valid_move?(desired_position)
     return false if desired_position == current_position
     return false if out_of_bounds?(desired_position)
+    
+    available_moves.include?(desired_position)
   end
 
   def out_of_bounds?(value)

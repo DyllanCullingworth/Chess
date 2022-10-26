@@ -3,6 +3,7 @@
 module Board
 
   def display_board
+    sleep(1)
     clear
     puts <<~HEREDOC
            a      b      c      d      e      f      g      h  

@@ -28,6 +28,20 @@ class ChessPiece
     false
   end
 
+  def get_piece(position)
+    piece = grid[position[0]][position[1]]
+    return if !piece.is_a?(ChessPiece)
+    
+    piece
+  end
+
+  def opponent_piece?(position)
+    piece = get_piece(position)
+
+    piece.is_a?(ChessPiece) &&
+    piece.color != color
+  end
+
   def symbol
      @_symbol ||= "265#{unicode_value}".to_i(16).chr('UTF-8').colorize(color)
   end
@@ -38,6 +52,10 @@ class ChessPiece
 
   def direction
     white? ? 1 : -1
+  end
+
+  def update_grid
+    grid[current_position[0]][current_position[1]] = self
   end
 
   class << self

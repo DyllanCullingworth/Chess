@@ -38,12 +38,8 @@ class Player
     # king [4]
     pieces << King.new(color, grid, [4, main_index])
 
-    update_grid(grid)
-  end
-
-  def update_grid(grid)
     pieces.each do |piece|
-      grid[piece.current_position[0]][piece.current_position[1]] = piece
+      piece.update_grid
     end
   end
   

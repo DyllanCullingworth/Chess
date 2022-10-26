@@ -9,7 +9,6 @@ class Chess
   attr_accessor \
     :grid, 
     :game_over,
-    :player,
     :piece
 
   def initialize(p1, p2)
@@ -23,7 +22,7 @@ class Chess
     @p1.initialize_pieces(grid)
     @p2.initialize_pieces(grid)
 
-    @player = @p1
+    player = @p1
     
     while !game_over
       display_board
@@ -38,8 +37,9 @@ class Chess
         @piece       = get_piece(current_position)
         @other_piece = get_piece(desired_position)
 
-        if valid_move?(desired_position)
+        if valid_move?(player, desired_position)
           move_piece(current_position, desired_position)
+          player == @p1 ? player = @p2 : player = @p1
         else
           puts 'That is an invalid move'
         end
@@ -66,9 +66,9 @@ class Chess
     end.reverse
   end
 
-  def valid_move?(desired_position)
-    piece.color == player.color &&
+  def valid_move?(player, desired_position)
     piece.is_a?(ChessPiece) && 
+    piece.color == player.color &&
     piece.valid_move?(desired_position)
   end
 

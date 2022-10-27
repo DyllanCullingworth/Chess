@@ -6,4 +6,13 @@ class Bishop < ChessPiece
     color == :white ? '7' : 'D'
   end
 
+  def available_moves
+    [
+      moves_in_direction(1,1),
+      moves_in_direction(1,-1),
+      moves_in_direction(-1,-1),
+      moves_in_direction(-1,1),
+    ].flatten(1).compact
+  end
+
 end

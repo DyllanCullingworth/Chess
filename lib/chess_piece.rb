@@ -58,8 +58,24 @@ class ChessPiece
     grid[current_position[0]][current_position[1]] = self
   end
 
-  class << self
+  private
 
-  end
+    def moves_in_direction(x,y)
+      moves    = []
+      position = current_position.dup
+
+      loop do 
+        position = position[0]+x, position[1]+y
+
+        break if out_of_bounds?(position)
+        break if get_piece(position)&.color == color
+        
+        moves << position 
+        
+        break if opponent_piece?(position)
+      end
+
+      moves
+    end
 
 end

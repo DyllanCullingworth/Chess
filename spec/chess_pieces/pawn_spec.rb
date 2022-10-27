@@ -66,6 +66,12 @@ describe Pawn do
         
         it { expect(white_pawn.available_moves).to eq([])}
       end
+
+      context 'when piece is one piece from the edge' do
+        let(:white_position) { [0,6] }
+        
+        it { expect(white_pawn.available_moves).to eq([[0,7]])}
+      end
     end
 
     context 'as a black pawn' do
@@ -107,6 +113,12 @@ describe Pawn do
         let(:black_position) { [0,0] }
         
         it { expect(black_pawn.available_moves).to eq([])}
+      end
+
+      context 'when piece is one piece from the edge' do
+        let(:black_position) { [0,1] }
+        
+        it { expect(black_pawn.available_moves).to eq([[0,0]])}
       end
     end
   end

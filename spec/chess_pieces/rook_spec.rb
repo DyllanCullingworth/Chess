@@ -4,8 +4,8 @@ require 'chess_pieces/rook'
 describe Rook do
   let(:grid)             { 8.times.map { Array.new(8) { 0 } } }
   let(:white_rook)       { Rook.new(:white, grid, white_position) }
-  let(:blocker)          { Rook.new(:white, grid, blocker_position) }
   let(:black_rook)       { Rook.new(:black, grid, black_position) }
+  let(:blocker)          { Rook.new(:white, grid, blocker_position) }
   let(:white_position)   { [0,0] }
   let(:black_position)   { [7,7] }
   let(:blocker_position) { [1,1] }

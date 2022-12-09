@@ -7,22 +7,21 @@ class Chess
   include Board
   
   attr_accessor \
-    :grid, 
     :game_over,
     :piece
 
   def initialize(p1, p2)
     @game_over = false
-    @grid      = 8.times.map { Array.new(8) { '' } }
-    @p1        = p1
-    @p2        = p2
+    $grid      = 8.times.map { Array.new(8) { '' } }
+    $white     = p1
+    $black     = p2
   end
 
   def play 
-    @p1.initialize_pieces(grid)
-    @p2.initialize_pieces(grid)
+    $white.initialize_pieces
+    $black.initialize_pieces
 
-    player = @p1
+    player = $white
     
     while !game_over
       display_board
@@ -39,7 +38,17 @@ class Chess
 
         if valid_move?(player, desired_position)
           move_piece(current_position, desired_position)
-          player == @p1 ? player = @p2 : player = @p1
+
+          if player.king.check?
+            if player.checkmate?
+              game_over = true
+              puts 'Checkmate'
+            else
+              puts 'Check'
+            end
+          end
+          
+          player == $white ? player = $black : player = $white
         else
           puts 'That is an invalid move'
         end
@@ -50,7 +59,7 @@ class Chess
   end
 
   def get_piece(position)
-    piece = grid[position[0]][position[1]]
+    piece = $grid[position[0]][position[1]]
     return if !piece.is_a?(ChessPiece)
 
     piece
@@ -76,7 +85,7 @@ class Chess
     @other_piece&.current_position = nil
     @piece.current_position = desired_position
     
-    grid[current_position[0]][current_position[1]] = ''
-    grid[desired_position[0]][desired_position[1]] = piece
+    $grid[current_position[0]][current_position[1]] = ''
+    $grid[desired_position[0]][desired_position[1]] = @piece
   end
 end

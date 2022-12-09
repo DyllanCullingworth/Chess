@@ -7,6 +7,8 @@ class Pawn < ChessPiece
   end
   
   def available_moves
+    super
+    
     [forward, take_left, take_right].flatten(1).compact
   end
 

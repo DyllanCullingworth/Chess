@@ -63,11 +63,18 @@ module Board
   end
 
   def display_piece(col, row)
-    piece  = grid[col][row]
+    piece  = $grid[col][row]
     symbol = ' '
     symbol = piece.symbol if piece.is_a?(ChessPiece)
 
     "   #{symbol}   "
+  end
+
+  def get_piece(position)
+    piece = $grid[position[0]][position[1]]
+    return if !piece.is_a?(ChessPiece)
+
+    piece
   end
 
 end

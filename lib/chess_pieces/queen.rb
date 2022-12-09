@@ -7,6 +7,8 @@ class Queen < ChessPiece
   end
 
   def available_moves
+    super
+    
     [
       moves_in_direction(0,1),
       moves_in_direction(1,1),

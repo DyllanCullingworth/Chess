@@ -5,13 +5,16 @@ class ChessPiece
   attr_reader :color
 
   attr_accessor \
-    :grid,
     :current_position
   
-  def initialize(color, grid, position)
+  def initialize(color, position)
     @color            = color
-    @grid             = grid
     @current_position = position
+    @alive            = true
+  end
+
+  def available_moves
+    return [] if current_position == nil
   end
 
   def valid_move?(desired_position)
@@ -29,7 +32,7 @@ class ChessPiece
   end
 
   def get_piece(position)
-    piece = grid[position[0]][position[1]]
+    piece = $grid[position[0]][position[1]]
     return if !piece.is_a?(ChessPiece)
     
     piece
@@ -50,12 +53,16 @@ class ChessPiece
     color == :white
   end
 
+  def opponent
+    white? ? $black : $white
+  end
+
   def direction
     white? ? 1 : -1
   end
 
   def update_grid
-    grid[current_position[0]][current_position[1]] = self
+    $grid[current_position[0]][current_position[1]] = self
   end
 
   private

@@ -7,6 +7,8 @@ class Knight < ChessPiece
   end
 
   def available_moves
+    super
+    
     deltas = [[1,2], [2,1], [2,-1], [1,-2], [-1,-2], [-2,-1], [-2,1], [-1,2]]
     moves  = []
     

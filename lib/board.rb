@@ -6,10 +6,10 @@ module Board
     sleep(1)
     clear
     puts <<~HEREDOC
-           a      b      c      d      e      f      g      h  
+           a      b      c      d      e      f      g      h
         #{row_spacing(7)}
       8 #{display_row(7)}
-        #{row_spacing(7)}  
+        #{row_spacing(7)}
         #{row_spacing(6)}
       7 #{display_row(6)}
         #{row_spacing(6)}
@@ -31,7 +31,7 @@ module Board
         #{row_spacing(0)}
       1 #{display_row(0)}
         #{row_spacing(0)}
-           a      b      c      d      e      f      g      h  
+           a      b      c      d      e      f      g      h
 
 
     HEREDOC
@@ -40,22 +40,22 @@ module Board
   def display_row(row)
     string = ''
     0.upto(7) do |col|
-      background = (col+1 * row+1).even? ? :white : :light_black
-      
-      string += "#{display_piece(col, row)}".colorize(background: background)
+      background = (col + 1 * row + 1).even? ? :white : :light_black
+
+      string += display_piece(col, row).to_s.colorize(background: background)
     end
-    string + " #{row+1}"
+    string + " #{row + 1}"
   end
 
   def row_spacing(row)
     string = ''
     0.upto(7) do |col|
-      background = (col+1 * row+1).even? ? :white : :light_black
-      
+      background = (col + 1 * row + 1).even? ? :white : :light_black
+
       string += '       '.colorize(background: background)
     end
 
-    string 
+    string
   end
 
   def change_background(current_color)
